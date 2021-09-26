@@ -1,8 +1,16 @@
 *{
-background-color: black;
+background-color:grey;
 }
 
 h1{
   text-align: center;
-  color: white;
+  color:black;
+}
+
+
+#p-card, #c-card {
+  border: 2px solid white;
+  border-radius: 3vmin;
+  width: 10%;
+  padding: 1px;
 }

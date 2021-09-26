@@ -1,0 +1,19 @@
+*{
+background-color:grey;
+}
+
+h1{
+  text-align: center;
+  color:black;
+}
+
+#image{ 
+  grid-area: img;
+  width: 18%;
+ height: 70%;
+ border: solid 2px green;
+ border-radius: 60%;
+ justify-content: center;
+
+}
+
