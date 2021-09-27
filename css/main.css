@@ -1,5 +1,5 @@
 *{
-background-color:white;
+background-color: grey;
 }
 
 h1{
@@ -8,9 +8,17 @@ h1{
 }
 
 
-#p-card, #c-card {
+#p-card, #c-card, #c-card2 {
   border: 2px solid white;
   border-radius: 3vmin;
   width: 10%;
   padding: 1px;
+}
+
+button{
+justify-self: center;
+width: 15vmin;
+margin: 2vmin;
+
+
 }
