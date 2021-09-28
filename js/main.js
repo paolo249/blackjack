@@ -8,7 +8,7 @@ const masterDeck = buildMasterDeck();
 // renderNewShuffledDeck(shuffledDeck, document.getElementById('shuffle-deck-container'));
 
 /*----- app's state (variables) -----*/
-let pDeck, pDeck2, cDeck, cDeck2, pHand, pHand2, cHand, cHand2, betVal;
+let pDeck, pDeck2, cDeck, cDeck2, pHand, pHand2, cHand, cHand2,cInit, betVal;
 //let scoreVal, winner, betVal;
 
 /*----- cached element references -----*/
@@ -37,16 +37,21 @@ init();
      pHand2 =[];
      cHand2 =[];   
      render();
+     winningHand();
  }
 
 function winningHand(){
-     if(pHand[0].value === cHand[0].value){
-         winner = 't'; 
-     } else if(pHand[0].value >cHand[0].value){
-          winner = pHand;
-     } else{
+     if(pHand[0].value === 21){
+         winner = 'winner!'; 
+      } 
+     else if(pHand[0].value < 21 || cHand[0].value < 21){
+          pHand = pHand.push();
+     } 
+     else{
           winner = cHand;
-     }
+        }
+   
+      return pHand;
 }
 
 
@@ -56,7 +61,7 @@ function winningHand(){
    let pCard = pDeck.shift();
    pHand.unshift(pCard);
 
-   let pCard2 = pDeck2.shift();
+   let pCard2 = pDeck.shift();
    pHand2.unshift(pCard2);
 
    let cCard = cDeck.shift();
@@ -68,7 +73,21 @@ function winningHand(){
  }
 
  function render() {
-    if(pHand.length > 0 && cHand.length > 0) {
+    if(cHand.length === 0)
+    {
+     // let cHandinit = `<div class = "${cHand[0].face}"> </div>`;
+     // cHandEl.innerHTML = cHandinit;
+
+
+//     let cHandtemp2 = `<div class = "card ${cInit[0].face}"> </div>`;
+//     cHandEl2.innerHTML = cHandtemp2;
+         
+    let cHandinit2 = `<div class = "card back"> </div>`;
+    cHandEl2.innerHTML = cHandinit2;
+
+    }
+    
+    else if(pHand.length > 0 && cHand.length > 0) {
     let pHandtemp = `<div class = "card ${pHand[0].face}"> </div>`;
      pHandEl.innerHTML = pHandtemp;
 
@@ -82,7 +101,6 @@ function winningHand(){
     cHandEl2.innerHTML = cHandtemp2;
      }
 
-     
 
  }
 
