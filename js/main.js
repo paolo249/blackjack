@@ -1,6 +1,19 @@
+
+// betting  (create new buttons and those buttons will have an event listener)
+// win logic(separate function) console log add up total and press hit
+
+
+// 9-29 TROUBLESHOOT UPDATE: How to access pHandTemp value and turn into integer 
+
+// forEach - adding up all the values (coding challenge)
+
+
+
 /*----- constants -----*/
 const suits = ['s', 'c', 'd', 'h'];
 const ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
+const GOAL_COUNT = 21;
+
 
 // Build a 'master' deck of 'card' objects used to create shuffled decks
 const masterDeck = buildMasterDeck();
@@ -8,117 +21,210 @@ const masterDeck = buildMasterDeck();
 // renderNewShuffledDeck(shuffledDeck, document.getElementById('shuffle-deck-container'));
 
 /*----- app's state (variables) -----*/
-let pDeck, pDeck2, cDeck, cDeck2, pHand, pHand2, cHand, cHand2,cInit, betVal;
-//let scoreVal, winner, betVal;
+let pHand, cHand, betVal, bankRoll, winner, deck, goalMet;
+let pVal = 0;
+let cVal = 0;
+
 
 /*----- cached element references -----*/
-let pHandEl = document.querySelector('#pHand');
-let pHandEl2 = document.querySelector('#pHand2');
-let cHandEl = document.querySelector('#cHand');
-let cHandEl2 = document.querySelector('#cHand2');
+ const pHandEl = document.querySelector('#pHand');
+ const cHandEl = document.querySelector('#cHand');
+ const msgEl = document.querySelector('h2');
 
 //const shuffledContainer = document.getElementById('shuffled-deck-container');
 
 /*----- event listeners -----*/
-document.querySelector('button').addEventListener('click', handleDeck);
+document.querySelector('#deal').addEventListener('click', dealCards);
+document.querySelector('#hit').addEventListener('click', playerHit);
 
 /*----- functions -----*/
-init();
+  init();
+
  function init(){
-     let shufDeck = getNewShuffledDeck();
-     let shufDeck2 = getNewShuffledDeck();
-     //grab first two cards from the shuffled deck
-      pDeck = shufDeck.splice(0,26);
-      pDeck2 = shufDeck;
-     cDeck = shufDeck2.splice(0,26);
-     cDeck2 = shufDeck2;
+     
+     goalMet = '';
      pHand =[];
-     cHand =[];    
-     pHand2 =[];
-     cHand2 =[];   
+     cHand =[]; 
+     winner = null;
+     
+     bankRoll = 500;
+     betVal = 0;
+
+     deck = getNewShuffledDeck();
      render();
-     winningHand();
+
+
  }
 
-function winningHand(){
-     if(pHand[0].value === 21){
-         winner = 'winner!'; 
-      } 
-     else if(pHand[0].value < 21 || cHand[0].value < 21){
-          pHand = pHand.push();
-     } 
-     else{
-          winner = cHand;
-        }
-   
-      return pHand;
-}
-
-
- function handleDeck() {
-    // shift() removes first element from an array and returns that removed element.
-    // changes length of array
-   let pCard = pDeck.shift();
-   pHand.unshift(pCard);
-
-   let pCard2 = pDeck.shift();
-   pHand2.unshift(pCard2);
-
-   let cCard = cDeck.shift();
-   cHand.unshift(cCard);
-
-   let cCard2 = cDeck2.shift();
-   cHand2.unshift(cCard2);
-   render();
- }
-
+ 
  function render() {
-    if(cHand.length === 0)
-    {
-     // let cHandinit = `<div class = "${cHand[0].face}"> </div>`;
-     // cHandEl.innerHTML = cHandinit;
+          let tempVal = 0;
+          let cHandTemp = "";
+       
 
 
-//     let cHandtemp2 = `<div class = "card ${cInit[0].face}"> </div>`;
-//     cHandEl2.innerHTML = cHandtemp2;
+          cHand.forEach(function(card,idx){ 
+           if(idx === 0){
+                cHandTemp += `<div class = "card back" ${card.value} > </div>`;
+               
+               }
+               else {
+                    //cHandTemp += `<div class = "card ${card.face}"> </div>`;
+                    cHandTemp = cHandTemp + `<div class = "card ${card.face} "> </div>`;
+               
+               } 
+               
+           })
+          cHandEl.innerHTML = cHandTemp;
+          
+          
+          
+          let pHandTemp = "";
+          pHand.forEach(function(card,idx){
+               // pHandTemp += `<div class = "card ${card.face}"> </div>`;
+               
+               pHandTemp = pHandTemp + `<div class = "card ${card.face} ${card.value}"> </div>`;
+               
+              //ask chris or jim if this is how to access the value of the card
+               tempVal = tempVal + pHand[idx].value;
+          })
+          pHandEl.innerHTML = pHandTemp;
+
          
-    let cHandinit2 = `<div class = "card back"> </div>`;
-    cHandEl2.innerHTML = cHandinit2;
+          
+          //msgEl.textContent = goalMet ? `Winner!` : '';
+          // if(winner = true){
+          //   msgEl.textContent = 'Winner!';
+          // }
+          // else if(winner = false){
+          //      msgEl.textContent = 'Loser';
+          // }
+          // if(msgEl.textContent = goalMet){
+          //      return 'Winner';
+          // }
+          // else return 'Loser';
+          
+          
+          
+ } 
+     
+     
+     
+// Deal Cards Functions //
+function playerHit(){
+          let pCard = deck.shift();  // take card from top of pile
+          pHand.push(pCard);  // adds into player's hand
+          //call check for winner fxn
+          render(); 
+          
+          
+ }
+     
+function dealCards() {
+          //assign two cards to dealer and to player
+          
+          let pCard = deck.shift();  // take card from top of pile
+          pHand.push(pCard);  // adds into player's hand
+          
+          let pCard2 = deck.shift();
+          pHand.push(pCard2);
+          
+          let cCard = deck.shift();
+          cHand.push(cCard);
+          
+          let cCard2 = deck.shift();
+          cHand.push(cCard2);
+          //call check for Winner fxn
+          render();
+ }
+     
+     
 
-    }
-    
-    else if(pHand.length > 0 && cHand.length > 0) {
-    let pHandtemp = `<div class = "card ${pHand[0].face}"> </div>`;
-     pHandEl.innerHTML = pHandtemp;
+// Winning Function //
+     
+function winningHand(){
+          
+     
+     if(pVal === GOAL_COUNT){    
+          return winner = true;
+         }
+     else
+         return winner = false;
+ 
+     
+          // pHand.forEach(function(card){
+          //      //access card's value and sum
+          //      winner = winner + card.value;
 
-    let pHandtemp2 = `<div class = "card ${pHand2[0].face}"> </div>`;
-    pHandEl2.innerHTML = pHandtemp2;
-
-    let cHandtemp = `<div class = "card ${cHand[0].face}"> </div>`;
-    cHandEl.innerHTML = cHandtemp;
-
-    let cHandtemp2 = `<div class = "card ${cHand2[0].face}"> </div>`;
-    cHandEl2.innerHTML = cHandtemp2;
-     }
-
-
+             
+          // })
+          
+          // cHand.forEach(function(card){
+          //      //access card's value and sum
+          //      winner = winner + card.value;
+          // })
+               
+           
+          
+         
+           
+           //goalMet = winner === 21 ? winner : '';
+           render();
+       
+              
+          
+          
+          
+          
+          //      if(pHand[0].value === 21){
+               //          winner = pHand; 
+               //       } 
+               //      else if(pHand[0].value < 21 || cHand[0].value < 21){
+                    //           pHand = pHand.push();
+                    //      } 
+                    //      else{
+                         //           winner = cHand;
+                         //         }
+                         
+                         //       return winner;
+ }
+                    
+                    
+                    
+// Build Deck Functions //
+function getNewShuffledDeck() {
+                         // Create a copy of the masterDeck (leave masterDeck untouched!)
+                         const tempDeck = [...masterDeck];
+                         const newShuffledDeck = [];
+                         // access event.listener and then use event listener
+                         while (tempDeck.length) {
+                              // Get a random index for a card still in the tempDeck
+                              const rndIdx = Math.floor(Math.random() * tempDeck.length);
+                              // Note the [0] after splice - this is because splice always returns an array and we just want the card object in that array
+                              newShuffledDeck.push(tempDeck.splice(rndIdx, 1)[0]);
+                             }
+                     return newShuffledDeck;
+  }
+                
+  
+function buildMasterDeck() {
+                         const deck = [];
+                         // Use nested forEach to generate card objects
+                         suits.forEach(function(suit) {
+    ranks.forEach(function(rank) {
+      deck.push({
+        // The 'face' property maps to the library's CSS classes for cards
+        face: `${suit}${rank}`,
+        // Setting the 'value' property for game of blackjack, not war
+        value: Number(rank) || (rank === 'A' ? 11 : 10) //
+      });
+    });
+  });
+  return deck;
  }
 
 
 
-function getNewShuffledDeck() {
-  // Create a copy of the masterDeck (leave masterDeck untouched!)
-  const tempDeck = [...masterDeck];
-  const newShuffledDeck = [];
-  // access event.listener and then use event listener
-  while (tempDeck.length) {
-    // Get a random index for a card still in the tempDeck
-    const rndIdx = Math.floor(Math.random() * tempDeck.length);
-    // Note the [0] after splice - this is because splice always returns an array and we just want the card object in that array
-    newShuffledDeck.push(tempDeck.splice(rndIdx, 1)[0]);
-  }
-  return newShuffledDeck;
-}
 
 // function renderNewShuffledDeck() {
 //   // Create a copy of the masterDeck (leave masterDeck untouched!)
@@ -140,21 +246,6 @@ function getNewShuffledDeck() {
 //   container.innerHTML = cardsHtml;
 // }
 
-function buildMasterDeck() {
-  const deck = [];
-  // Use nested forEach to generate card objects
-  suits.forEach(function(suit) {
-    ranks.forEach(function(rank) {
-      deck.push({
-        // The 'face' property maps to the library's CSS classes for cards
-        face: `${suit}${rank}`,
-        // Setting the 'value' property for game of blackjack, not war
-        value: Number(rank) || (rank === 'A' ? 11 : 1) //obj square lookup  q'11 a'14
-      });
-    });
-  });
-  return deck;
-}
 
 //renderNewShuffledDeck();
 //separate 
