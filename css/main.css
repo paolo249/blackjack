@@ -1,18 +1,18 @@
-*{
+* {
   background-color: grey;
 }
 
-h1{
+h1 {
   text-align: center;
   color:black;
 }
 
-button{
+button {
   width: 15vmin;
   margin: 10vmin;
 }
 
-#computer, #player{
+#computer, #player {
   display: flex;
   flex-direction: row;
 }
