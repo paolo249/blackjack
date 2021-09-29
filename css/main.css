@@ -1,5 +1,5 @@
 *{
-background-color: grey;
+  background-color: grey;
 }
 
 h1{
@@ -8,11 +8,11 @@ h1{
 }
 
 button{
-width: 15vmin;
-margin: 10vmin;
+  width: 15vmin;
+  margin: 10vmin;
 }
 
 #computer, #player{
-display: flex;
-flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
