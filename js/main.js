@@ -30,9 +30,12 @@ const dealBtn = document.getElementById('deal');
 const hitBtn = document.getElementById('hit');
 const standBtn = document.getElementById('stand');
 const oneBtn = document.getElementById('one');
-const tenBtn = document.getElementById('ten');
-const twentyBtn = document.getElementById('twenty');
+const fiveBtn = document.getElementById('five');
+const twentyfiveBtn = document.getElementById('twentyfive');
 const hundredBtn = document.getElementById('hundred');
+const betEl = document.getElementById('bet');
+const bankEl = document.getElementById('bankRoll');
+
 
 
 /*----- event listeners -----*/
@@ -40,8 +43,8 @@ dealBtn.addEventListener('click', dealCards);
 hitBtn.addEventListener('click', playerHit);
 standBtn.addEventListener('click', playerStand);
 oneBtn.addEventListener('click', playerBet);
-tenBtn.addEventListener('click', playerBet);
-twentyBtn.addEventListener('click', playerBet);
+fiveBtn.addEventListener('click', playerBet);
+twentyfiveBtn.addEventListener('click', playerBet);
 hundredBtn.addEventListener('click', playerBet);
 
 /*----- functions -----*/
@@ -66,6 +69,7 @@ function render() {
   }
   renderMsg();
   renderControls();
+  renderBetting();
 }
 
 function renderMsg() {
@@ -87,10 +91,13 @@ function renderMsg() {
 }
 
 function renderControls() {
-  
-  dealBtn.style.visibility = betVal > 0 && handStatus !== null ? "visible" : "hidden";
-  standBtn.style.visibility = !handStatus && pHand.length ? "visible" : "hidden";
-  hitBtn.style.visibility = !handStatus && pHand.length ? "visible" : "hidden";
+  dealBtn.style.display = betVal > 0 && handStatus !== null ? "inline-block" : "none";
+  standBtn.style.display = !handStatus && pHand.length ? "inline-block" : "none";
+  hitBtn.style.display = !handStatus && pHand.length ? "inline-block" : "none";
+  oneBtn.style.display = handStatus !== null ? "inline-block" : "none";
+  fiveBtn.style.display = handStatus !== null ? "inline-block" : "none";
+  twentyfiveBtn.style.display = handStatus !== null ? "inline-block" : "none";
+  hundredBtn.style.display = handStatus !== null ? "inline-block" : "none";
 }
 
 function renderCards() {
@@ -111,19 +118,16 @@ function renderCards() {
   pHandEl.innerHTML = html;
 }
 
-function playerBet() {
-  //if button is clicked add value to betVal
-  
-  if (oneBtn) {
-       betVal += 1;
-  } else if (tenBtn) {
-       betVal += 10;
-  } else if (twentyBtn) {
-       betVal += 20;
-  } else if (hundredBtn) {
-       betVal += 100;
-  } 
+function renderBetting() {
+  betEl.innerHTML = `Bet: $${betVal}`; 
+  bankEl.innerHTML = `Bankroll: $${bankRoll}`;
+}
 
+function playerBet(evt) {
+  const bet = parseInt(evt.target.textContent);
+  if (bankRoll < bet) return;
+  bankRoll -= bet;
+  betVal += bet;
   render();
 }
 
@@ -133,6 +137,7 @@ function playerHit() {
   let pVal = getHandVal(pHand);
   if (pVal > 21) {
     handStatus = 'c';
+    betVal = 0;
   }
   render();
 }
@@ -147,12 +152,19 @@ function playerStand() {
   }
   if (cVal > 21) {
     handStatus = 'p';
+    bankRoll += betVal * 2;
+    betVal = 0;
   } else if (pVal > cVal) {
     handStatus = 'p';
+    bankRoll += betVal * 2;
+    betVal = 0;
   } else if (pVal < cVal) {
     handStatus = 'c';
+    betVal = 0;
   } else {
     handStatus = 't';
+    bankRoll += betVal;
+    betVal = 0;
   }
   render();
 }
@@ -174,10 +186,15 @@ function dealCards() {
   let cVal = getHandVal(cHand);
   if (pVal === 21 && cVal === 21) { 
     handStatus = 't';
+    bankRoll += betVal;
+    betVal = 0;
   } else if (pVal === 21) {
     handStatus = 'pbj';
+    bankRoll += betVal + betVal * 1.5;
+    betVal = 0;
   } else if (cVal === 21) {
     handStatus = 'cbj';
+    betVal = 0;
   }
   render();
 }
