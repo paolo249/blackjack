@@ -12,6 +12,7 @@ h1 {
 }
 a{
   display: flex;
+<<<<<<< HEAD
   
   width: 40vmin;
   height: 40vmin;
@@ -23,12 +24,27 @@ a{
   margin: 10vmin;
 }
 
+=======
+  width: 30vmin;
+  height: 30vmin;
+}
+
+
+#one, #five, #twentyfive, #hundred{
+  width: 10vmin;
+  margin: 10vmin;
+}
+
+>>>>>>> main
 #deal, #hit, #stand{
   width: 25vmin;
   margin: 10vmin;
 }
 
+<<<<<<< HEAD
 
 #computer, #player {
 
 }
+=======
+>>>>>>> main
