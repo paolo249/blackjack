@@ -30,8 +30,8 @@ const dealBtn = document.getElementById('deal');
 const hitBtn = document.getElementById('hit');
 const standBtn = document.getElementById('stand');
 const oneBtn = document.getElementById('one');
-const tenBtn = document.getElementById('ten');
-const twentyBtn = document.getElementById('twenty');
+const fiveBtn = document.getElementById('five');
+const twentyfiveBtn = document.getElementById('twentyfive');
 const hundredBtn = document.getElementById('hundred');
 
 
@@ -40,8 +40,8 @@ dealBtn.addEventListener('click', dealCards);
 hitBtn.addEventListener('click', playerHit);
 standBtn.addEventListener('click', playerStand);
 oneBtn.addEventListener('click', playerBet);
-tenBtn.addEventListener('click', playerBet);
-twentyBtn.addEventListener('click', playerBet);
+fiveBtn.addEventListener('click', playerBet);
+twentyfiveBtn.addEventListener('click', playerBet);
 hundredBtn.addEventListener('click', playerBet);
 
 /*----- functions -----*/

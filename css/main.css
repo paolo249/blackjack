@@ -1,18 +1,29 @@
 * {
-  background-color: grey;
+  background-color:beige;
+}
+
+body {
+  font-family: 'Merriweather', serif;
 }
 
 h1 {
   text-align: center;
   color:black;
 }
+a{
+  display: flex;
+  width: 30vmin;
+  height: 30vmin;
+}
 
-button {
-  width: 15vmin;
+
+#one, #five, #twentyfive, #hundred{
+  width: 10vmin;
   margin: 10vmin;
 }
 
-#computer, #player {
-  display: flex;
-  flex-direction: row;
+#deal, #hit, #stand{
+  width: 25vmin;
+  margin: 10vmin;
 }
+

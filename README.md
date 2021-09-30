@@ -1,25 +1,23 @@
 # blackjack
-Demonstrates the game Black Jack
-Black_Jack (21)
-Student Objective: Demonstrates ability to create a web browser game
-Game Objective: Player and computer must attempt to reach close to or exactly 21 in order to win the game! 
- If he/she goes over 21, he/she "busts" and the game is over.
-
-//in the start of the program the player(user) will have the opportunity to choose two options: User can play
- the game or quit the program overall
-
-// If player chooses to play the game he/she will be dealt two cards in the main screen. 
-(Both of these cards will be random generated)
+Blackjack: A fun and exciting game that is played between the dealer and the player!  In this game, the player is dealt two cards in which he/she sums up the total value of the cards in order to try and get close or equal to 21.  If that player goes over 21 he/she "busts" and the game is over!
 
 
-//At this point player is presented with two options he/she can choose from.  The first option is to "hit", 
-which basically means that player is able to get another random card.  The second option is to "stay", in which
-case the player decides to keep his/her cards.
+☐ Screenshot(s): 
+Screen Shot 2021-09-30 at 7.56.26 AM
+Screen Shot 2021-09-30 at 7.56.30 AM
 
-// If the first option is considered his/her cards will be summed up and his/her total value of cards will be updated.
-  Technically speaking the program will then check if the total value of cards are less than, equal to, or greater than 21. 
 
-//Winning Conditions:
-* 		If player’s total representative value is strictly equal to 21.  He/She wins the game!
-* 		If player’s total representative value is closer to 21.  He/She wins the game!  
-* 		Computer will also have the same winning conditions as player. 
+☐ Technologies Used: 
+- JavaScript
+- HTML, 
+- CSS, 
+- Imgur, 
+- Google Fonts
+- 
+☐ Getting Started: 
+https://github.com/paolo249/blackjack.git
+
+☐ Next Steps: Planned future enhancements (icebox items).
+- add animations 
+- add sounds
+- overal clean look and feel
