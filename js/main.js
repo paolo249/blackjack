@@ -85,9 +85,7 @@ function renderMsg() {
     msgEl.textContent = "Dealer Wins!";
   } else if (handStatus === null) {
     msgEl.textContent = "Hit or Stand";
-  } else {
-    msgEl.textContent = "Welcome, Good Luck!";
-  }
+  } 
 }
 
 function renderControls() {
