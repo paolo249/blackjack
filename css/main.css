@@ -1,3 +1,8 @@
+* {
+  font-family:'Merriweather', serif;
+}
+
+
 body{
   font-family:'Merriweather', serif;
   background-color:beige;
@@ -11,6 +16,7 @@ a{
   width:30vmin;
   height:30vmin;
 }
+
 #one, #five, #twentyfive, #hundred{
   width:10vmin;
   margin:10vmin;
@@ -18,4 +24,16 @@ a{
 #deal, #hit, #stand{
   width:25vmin;
   margin:10vmin;
+}
+
+div.card{
+
+  width:10vmin;
+  height:15vmin;
+
+}
+div#pHand, div#cHand{
+display:flex;
+flex-direction: row;
+
 }

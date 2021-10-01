@@ -11,10 +11,6 @@
 const suits = ['s', 'c', 'd', 'h'];
 const ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
 const GOAL_COUNT = 21;
-const audioSounds = {
- sound:'audio/Blastwave_FX_SlotMachineInsert_SFXB.3999.mp3'
-};
-
 const masterDeck = buildMasterDeck();
 
 /*----- app's state (variables) -----*/
@@ -39,6 +35,10 @@ const hundredBtn = document.getElementById('hundred');
 const betEl = document.getElementById('bet');
 const bankEl = document.getElementById('bankRoll');
 const betPlayer = new Audio('audio/Blastwave_FX_SlotMachineInsert_SFXB.3999.mp3');
+const swipeCard = new Audio('audio/zapsplat_leisure_playing_card_turn_over_on_table_001_10410.mp3');
+const winning = new Audio('audio/zapsplat_multimedia_game_tone_bright_sparkle_award_star_003_43982.mp3');
+const losing = new Audio('audio/zapsplat_multimedia_game_sound_fantasy_hit_injure_shot_lose_life_negative_73639.mp3');
+
 
 
 /*----- event listeners -----*/
@@ -78,16 +78,22 @@ function render() {
 
 function renderMsg() {
   if (handStatus === 't') {
+    losing.play();
     msgEl.textContent = "It's a Push!";
   } else if (handStatus === 'pbj') { 
+    winning.play();
     msgEl.textContent = 'Player Has BlackJack!';
   } else if (handStatus === 'cbj') {
+    losing.play();
     msgEl.textContent = 'Dealer Has BlackJack!';
   } else if (handStatus === 'p') {
+    winning.play();
     msgEl.textContent = "Player Wins!";
   } else if (handStatus === 'c') {
+    losing.play();
     msgEl.textContent = "Dealer Wins!";
   } else if (handStatus === null) {
+    losing.play();
     msgEl.textContent = "Hit or Stand";
   } 
 }
@@ -139,6 +145,7 @@ function playerBet(evt) {
 function playerHit() {
   let card = deck.shift();
   pHand.push(card);
+  swipeCard.play();
   let pVal = getHandVal(pHand);
   if (pVal > 21) {
     handStatus = 'c';
@@ -250,10 +257,4 @@ function buildMasterDeck() {
     });
   });
   return deck;
-}
-
-
-function audio(sound) {
-     player.src = audioSounds[sound];
-     player.play();
 }
