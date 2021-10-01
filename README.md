@@ -5,6 +5,8 @@ Blackjack: A fun and exciting game that is played between the dealer and the pla
 ☐ Screenshot(s): 
 Screen Shot 2021-09-30 at 7.56.26 AM
 Screen Shot 2021-09-30 at 7.56.30 AM
+![BlackJack]()
+#### THis text 
 
 ☐ Technologies Used: 
 - JavaScript

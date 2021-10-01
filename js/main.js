@@ -11,12 +11,15 @@
 const suits = ['s', 'c', 'd', 'h'];
 const ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
 const GOAL_COUNT = 21;
-
+const audioSounds = {
+ sound:'audio/Blastwave_FX_SlotMachineInsert_SFXB.3999.mp3'
+};
 
 const masterDeck = buildMasterDeck();
 
 /*----- app's state (variables) -----*/
 let pHand, cHand, betVal, bankRoll, handStatus, deck;
+
 
 
 
@@ -35,7 +38,7 @@ const twentyfiveBtn = document.getElementById('twentyfive');
 const hundredBtn = document.getElementById('hundred');
 const betEl = document.getElementById('bet');
 const bankEl = document.getElementById('bankRoll');
-
+const betPlayer = new Audio('audio/Blastwave_FX_SlotMachineInsert_SFXB.3999.mp3');
 
 
 /*----- event listeners -----*/
@@ -46,6 +49,7 @@ oneBtn.addEventListener('click', playerBet);
 fiveBtn.addEventListener('click', playerBet);
 twentyfiveBtn.addEventListener('click', playerBet);
 hundredBtn.addEventListener('click', playerBet);
+
 
 /*----- functions -----*/
 init();
@@ -107,12 +111,14 @@ function renderCards() {
       html = html + `<div class="card ${card.face}"></div>`;
     }
   });
+  
   cHandEl.innerHTML = html;
 
   html = "";
   pHand.forEach(function (card, idx) {
     html = html + `<div class="card ${card.face}"></div>`;
-  })
+  });
+
   pHandEl.innerHTML = html;
 }
 
@@ -124,6 +130,7 @@ function renderBetting() {
 function playerBet(evt) {
   const bet = parseInt(evt.target.textContent);
   if (bankRoll < bet) return;
+  betPlayer.play();
   bankRoll -= bet;
   betVal += bet;
   render();
@@ -194,6 +201,7 @@ function dealCards() {
     handStatus = 'cbj';
     betVal = 0;
   }
+
   render();
 }
 
@@ -212,6 +220,7 @@ function getHandVal(hand) {
   }
   return total;
 }
+
 
 function getNewShuffledDeck() {
   // Create a copy of the masterDeck (leave masterDeck untouched!)
@@ -241,4 +250,10 @@ function buildMasterDeck() {
     });
   });
   return deck;
+}
+
+
+function audio(sound) {
+     player.src = audioSounds[sound];
+     player.play();
 }
