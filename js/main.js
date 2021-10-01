@@ -1,8 +1,10 @@
-
-// betting  (create new buttons and those buttons will have an event listener)
-// win logic(separate function) console log add up total and press hit
-
+// Black Jack Project
+// Version 1.0
+// Author: Paolo G Ang
+// 
 // 9-29 TROUBLESHOOT UPDATE: 
+// betting (create new buttons and those buttons will have an event listener)
+// win logic(separate function) console log add up total and press hit
 // buttons -> increase bet by amount  
 // render bank roll and bet amount , and add buttons for place (only shows when Bet)
 
